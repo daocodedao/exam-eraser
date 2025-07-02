@@ -8,9 +8,11 @@ import json
 from tqdm import tqdm
 
 def load_model():
-    model = torch.load('model.pth', weights_only=False)
-    model.eval()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    model = torch.load('src/model.pth', map_location=device, weights_only=False)
+    model.eval()
+    # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(device)
     model.to(device)
     return model, device
